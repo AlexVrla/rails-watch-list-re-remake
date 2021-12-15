@@ -1,10 +1,14 @@
-<h1><%= @list.name %> movie list</h1>
-<% @list.movies.each do |movie| %>
-  <%= image_tag movie.poster_url, alt: movie.title, class: "" %>
-  <p>title: <%= movie.title %></p>
-  <p>rating: <%= movie.rating %></p>
-  <p>comment: <%= Bookmark.find_by(list: @list, movie: movie).comment %></p>
-  <%= link_to "Delete this movie from the list", bookmark_path(Bookmark.find_by(list: @list, movie: movie)), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"} %>
-<% end %>
+<div class="list-show">
+  <h1><%= @list.name %> movie list</h1>
+  <% @list.movies.each do |movie| %>
+    <div>
+      <%= image_tag movie.poster_url, alt: movie.title, class: "poster" %>
+      <p>title: <%= movie.title %></p>
+      <p>rating: <%= movie.rating %></p>
+      <p>comment: <%= Bookmark.find_by(list: @list, movie: movie).comment %></p>
+      <%= link_to "Delete this movie from the list", bookmark_path(Bookmark.find_by(list: @list, movie: movie)), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"} %>
+      <% end %>
+    </div>
 
-<%= link_to "Add a movie to this list", new_list_bookmark_path(@list) %>
+  <%= link_to "Add a movie to this list", new_list_bookmark_path(@list), :class => "btn btn-flat" %>
+</div>
