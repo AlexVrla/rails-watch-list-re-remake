@@ -4,7 +4,7 @@
   <p>title: <%= movie.title %></p>
   <p>rating: <%= movie.rating %></p>
   <p>comment: <%= Bookmark.find_by(list: @list, movie: movie).comment %></p>
-  <%= link_to "Delete this movie from the list", bookmark_path(Bookmark.find_by(list: @list, movie: movie)) %>
+  <%= link_to "Delete this movie from the list", bookmark_path(Bookmark.find_by(list: @list, movie: movie)), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"} %>
 <% end %>
 
 <%= link_to "Add a movie to this list", new_list_bookmark_path(@list) %>
