@@ -1,0 +1,10 @@
+<h1><%= @list.name %> movie list</h1>
+<% @list.movies.each do |movie| %>
+  <%= image_tag movie.poster_url, alt: movie.title, class: "" %>
+  <p>title: <%= movie.title %></p>
+  <p>rating: <%= movie.rating %></p>
+  <p>comment: <%= Bookmark.find_by(list: @list, movie: movie).comment %></p>
+  <%= link_to "Delete this movie from the list", bookmark_path(Bookmark.find_by(list: @list, movie: movie)) %>
+<% end %>
+
+<%= link_to "Add a movie to this list", new_list_bookmark_path(@list) %>
